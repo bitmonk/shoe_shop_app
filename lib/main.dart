@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app_flutter/cart_provider.dart';
 import 'package:shop_app_flutter/home_page.dart';
 
 void main() {
@@ -10,11 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Shopping App',
-      home: const HomePage(),
-      theme: ThemeData(
+    return ChangeNotifierProvider(
+      create: (context) => CartProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Shopping App',
+        theme: ThemeData(
           fontFamily: 'Lato',
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromRGBO(254, 206, 1, 1),
@@ -47,7 +50,10 @@ class MyApp extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          useMaterial3: true),
+          useMaterial3: true,
+        ),
+        home: const HomePage(),
+      ),
     );
   }
 }
